@@ -24,32 +24,45 @@ An AI-powered resume analysis system that extracts skills, matches with job desc
 | PDF Parsing | PyMuPDF |
 | Data Science | Pandas, NumPy |
 
-## Architecture
-User Interface
-│
-▼
-FastAPI Backend
-│
-├── Agentic AI System
-│ ├── Planner Agent
-│ ├── Researcher Agent
-│ ├── Analyzer Agent
-│ ├── Question Generator
-│ ├── Summary Agent
-│ └── Career Advisor
-│
-├── ML Components
-│ ├── ML Classifier (Role Prediction)
-│ ├── Semantic Analyzer (Job Matching)
-│ └── Data Science Analyzer
-│
-└── PDF Parser (Text Extraction)
-│
-▼
-Google Gemini API
-├── Question Generation
-├── Summary Generation
-└── Career Advice
+## System Architecture
+
+### Frontend Layer
+- **React Application** with three tabs:
+  - Upload PDF
+  - AI Analysis
+  - Interview Prep
+
+### Backend Layer
+- **FastAPI Server** handling all API requests
+
+### Agentic AI Layer
+- **Planner Agent** - Creates analysis plan
+- **Researcher Agent** - Extracts resume information
+- **Analyzer Agent** - Analyzes skills and patterns
+- **Question Generator** - Creates personalized questions
+- **Summary Agent** - Generates professional summary
+- **Career Advisor** - Suggests roles and skills
+
+### ML Components
+- **ML Classifier** - Predicts job role from resume
+- **Semantic Analyzer** - Matches resume with job description
+- **Data Science Analyzer** - Analyzes skill patterns
+- **PDF Parser** - Extracts text from PDF
+
+### AI Services
+- **Google Gemini API** for:
+  - Question Generation
+  - Summary Generation
+  - Career Recommendations
+
+### Data Flow
+1. User uploads PDF or pastes text
+2. Backend extracts text from PDF
+3. Agentic AI system starts analysis
+4. ML Classifier predicts role
+5. Semantic Analyzer matches with job
+6. Questions and summary are generated
+7. Results displayed to user
 
 
 ## Installation
@@ -68,28 +81,29 @@ python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 
-3. Configure Gemini API Key
+### Configure Gemini API Key
+
 Go to: https://aistudio.google.com/app/apikey
 
 Create a free API key
 
 Add it to backend/app/gemini_config.py
 
-Frontend Setup
+
+### Frontend Setup
 cd frontend
 npm install
 
-Running the Application
+### Running the Application
 Start Backend
 cd backend
 python -m app.main
 
-Start Frontend (New Terminal)
-bash
+### Start Frontend (New Terminal)
 cd frontend
 npm start
 
-Open Browser
+### Open Browser
 Backend: http://localhost:8000
 
 Frontend: http://localhost:3000
