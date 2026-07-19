@@ -25,56 +25,31 @@ An AI-powered resume analysis system that extracts skills, matches with job desc
 | Data Science | Pandas, NumPy |
 
 ## Architecture
-┌─────────────────────────────────────────────────────────────┐
-│                      USER INTERFACE                         │
-│                                                             │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐ │
-│  │ Upload PDF  │  │ AI Analysis │  │  Interview Prep     │ │
-│  └─────────────┘  └─────────────┘  └─────────────────────┘ │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    FASTAPI BACKEND                          │
-│                                                             │
-│  ┌─────────────────────────────────────────────────────────┐│
-│  │              AGENTIC AI SYSTEM (Multi-Agent)           ││
-│  │                                                         ││
-│  │  ┌───────────┐  ┌───────────┐  ┌───────────┐          ││
-│  │  │ Planner   │  │Researcher │  │ Analyzer  │          ││
-│  │  │  Agent    │→│  Agent    │→│  Agent    │          ││
-│  │  └───────────┘  └───────────┘  └───────────┘          ││
-│  │                                                         ││
-│  │  ┌───────────┐  ┌───────────┐  ┌───────────┐          ││
-│  │  │ Question  │  │ Summary   │  │ Career    │          ││
-│  │  │ Generator │←│  Agent    │←│ Advisor   │          ││
-│  │  └───────────┘  └───────────┘  └───────────┘          ││
-│  └─────────────────────────────────────────────────────────┘│
-│                                                             │
-│  ┌─────────────────────────────────────────────────────────┐│
-│  │              ML COMPONENTS                             ││
-│  │                                                         ││
-│  │  ┌───────────────────┐  ┌──────────────────────────┐  ││
-│  │  │  ML Classifier    │  │  Semantic Analyzer       │  ││
-│  │  │  Role Prediction  │  │  Job Matching            │  ││
-│  │  └───────────────────┘  └──────────────────────────┘  ││
-│  │                                                         ││
-│  │  ┌───────────────────┐  ┌──────────────────────────┐  ││
-│  │  │  Data Science     │  │  PDF Parser              │  ││
-│  │  │  Analyzer         │  │  Text Extraction         │  ││
-│  │  └───────────────────┘  └──────────────────────────┘  ││
-│  └─────────────────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────────┐
-│                  GOOGLE GEMINI API                          │
-│                                                             │
-│  ┌───────────────┐  ┌───────────────┐  ┌─────────────────┐ │
-│  │  Question     │  │   Summary     │  │  Career Advice  │ │
-│  │  Generation   │  │  Generation   │  │                 │ │
-│  └───────────────┘  └───────────────┘  └─────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
+User Interface
+│
+▼
+FastAPI Backend
+│
+├── Agentic AI System
+│ ├── Planner Agent
+│ ├── Researcher Agent
+│ ├── Analyzer Agent
+│ ├── Question Generator
+│ ├── Summary Agent
+│ └── Career Advisor
+│
+├── ML Components
+│ ├── ML Classifier (Role Prediction)
+│ ├── Semantic Analyzer (Job Matching)
+│ └── Data Science Analyzer
+│
+└── PDF Parser (Text Extraction)
+│
+▼
+Google Gemini API
+├── Question Generation
+├── Summary Generation
+└── Career Advice
 
 
 ## Installation
@@ -92,3 +67,29 @@ cd backend
 python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
+
+3. Configure Gemini API Key
+Go to: https://aistudio.google.com/app/apikey
+
+Create a free API key
+
+Add it to backend/app/gemini_config.py
+
+Frontend Setup
+cd frontend
+npm install
+
+Running the Application
+Start Backend
+cd backend
+python -m app.main
+
+Start Frontend (New Terminal)
+bash
+cd frontend
+npm start
+
+Open Browser
+Backend: http://localhost:8000
+
+Frontend: http://localhost:3000
